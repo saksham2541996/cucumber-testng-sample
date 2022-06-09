@@ -1,4 +1,4 @@
-# Run Selenium Tests With Cucumber On LambdaTest (Browser Cache Clearing Example)
+# Run Selenium Tests With Cucumber On LambdaTest (Scrolling element into view and scroll by pixel testng selenium Example)
 
 ![image](https://user-images.githubusercontent.com/70570645/171435902-8e87c640-dc42-4d01-a322-f39ffe1867d1.png)
 
@@ -102,11 +102,18 @@ DesiredCapabilities capability = new DesiredCapabilities();
             capability.setCapability(CapabilityType.PLATFORM, platform);
             capability.setCapability("build", "Your Build Name");
 ```
-### Clearing Browser Cache after Test
+### Scrolling element into view and scroll by pixel testng selenium code
 ```java
- // Clearing browser Cache after Test
-        driver.manage().deleteAllCookies(); // delete all cookies
-        Thread.sleep(7000); // wait 7 seconds to clear cookies.
+// Locating element by link text 
+        WebElement Element = driver.findElement(By.linkText("Book a Demo"));
+        // Scrolling down the page till the element is found
+        driver.executeScript("arguments[0].scrollIntoView();", Element);
+        Thread.sleep(1500);
+        // Scrolling down by pixels
+        driver.executeScript("window.scrollBy(0,-500)", "");
+        Thread.sleep(1500);
+        // Scrolling up by pixels
+        driver.executeScript("window.scrollBy(0,500)", "");
 ```
 You can generate capabilities for your test requirements with the help of [Desired Capability Generator](https://www.lambdatest.com/capabilities-generator/).
 

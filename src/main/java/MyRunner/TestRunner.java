@@ -2,6 +2,8 @@ package MyRunner;
 
 import java.net.URL;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -60,6 +62,28 @@ public class TestRunner {
     		String gridURL = "https://" + username + ":" + accesskey + "@hub.lambdatest.com/wd/hub";
     		System.out.println(gridURL);
     		connection = new RemoteWebDriver(new URL(gridURL), capability);
+
+            System.out.println("Loading Url");
+
+            connection.get("https://lambdatest.com");
+    
+            // Locating element by link text 
+            WebElement Element = connection.findElement(By.linkText("Book a Demo"));
+    
+            // Scrolling down the page till the element is found
+            connection.executeScript("arguments[0].scrollIntoView();", Element);
+            Thread.sleep(1500);
+    
+            // Scrolling down by pixels
+            connection.executeScript("window.scrollBy(0,-500)", "");
+    
+            Thread.sleep(1500);
+    
+            // Scrolling up by pixels
+            connection.executeScript("window.scrollBy(0,500)", "");
+    
+            Thread.sleep(1500);
+
     		System.out.println(capability);
     		System.out.println(connection.getSessionId());
 }
