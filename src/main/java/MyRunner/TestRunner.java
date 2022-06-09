@@ -47,7 +47,7 @@ public class TestRunner {
         DesiredCapabilities capability = new DesiredCapabilities();
         capability.setCapability(CapabilityType.BROWSER_NAME, browser);
         capability.setCapability(CapabilityType.VERSION, version);
-        capability.setCapability(CapabilityType.PLATFORM, platform);
+        capability.setCapability(CapabilityType.PLATFORM_NAME, platform);
 
         capability.setCapability("build", "Cucumber Sample Build");
         capability.setCapability("plugin", "git-cucumber");
@@ -55,14 +55,15 @@ public class TestRunner {
         String[] Tags = new String[] { "Feature", "Falcon", "Severe" };
         capability.setCapability("tags", Tags);
 
-        // Extension upload here using chrome options
-        ChromeOptions options = new ChromeOptions();
-        options.addExtensions(new File("./LambdatestScreenshotExtension.crx"));
-        capability.setCapability(ChromeOptions.CAPABILITY, options);
+        capability.setCapability("geoLocation","AR"); //Geolocation capability, check LambdaTest Capability Generator
 
         String gridURL = "https://" + username + ":" + accesskey + "@hub.lambdatest.com/wd/hub";
         System.out.println(gridURL);
         connection = new RemoteWebDriver(new URL(gridURL), capability);
+
+        connection.get("https://www.iplocation.net/");
+        Thread.sleep(15000);
+
         System.out.println(capability);
         System.out.println(connection.getSessionId());
     }
