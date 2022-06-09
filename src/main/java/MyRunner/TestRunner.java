@@ -1,6 +1,5 @@
 package MyRunner;
 
-import java.io.File;
 import java.net.URL;
 
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -55,14 +54,26 @@ public class TestRunner {
         String[] Tags = new String[] { "Feature", "Falcon", "Severe" };
         capability.setCapability("tags", Tags);
 
-        capability.setCapability("geoLocation","AR"); //Geolocation capability, check LambdaTest Capability Generator
+        // Chrome flag for headless using chrome options
+        ChromeOptions options = new ChromeOptions();
+
+        options.addArguments("--no-sandbox");
+        options.addArguments("--headless"); // headless flag for chrome
+        options.addArguments("disable-gpu");
+
+        capability.setCapability(ChromeOptions.CAPABILITY, options);
+
+        /*
+         * At lambdatest you can execute headless tests via `headless` capability on
+         * chrome, firefox and microsoft edge browser
+         */
+
+        // lambdatest Headless mode capability
+        // capability.setCapability("headless",true);
 
         String gridURL = "https://" + username + ":" + accesskey + "@hub.lambdatest.com/wd/hub";
         System.out.println(gridURL);
         connection = new RemoteWebDriver(new URL(gridURL), capability);
-
-        connection.get("https://www.iplocation.net/");
-        Thread.sleep(15000);
 
         System.out.println(capability);
         System.out.println(connection.getSessionId());
