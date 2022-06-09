@@ -96,12 +96,19 @@ Check out the [TestRunner.java](https://github.com/LambdaTest/cucumber-testng-sa
 **Step 3:** In the test script, you need to update your test capabilities. In this code, we are passing browser, browser version, and operating system information, along with LambdaTest Selenium grid capabilities via capabilities object. The capabilities object in the above code are defined as:
 
 ```java
-DesiredCapabilities capability = new DesiredCapabilities();
-            capability.setCapability(CapabilityType.BROWSER_NAME, browser);
-            capability.setCapability(CapabilityType.VERSION,version);
-            capability.setCapability(CapabilityType.PLATFORM, platform);
-            capability.setCapability("build", "Your Build Name");
-         capability.setCapability("timezone","UTC+03:00"); //Timezone capability to set the timezone
+ DesiredCapabilities capability = new DesiredCapabilities();
+        capability.setCapability(CapabilityType.BROWSER_NAME, browser);
+        capability.setCapability(CapabilityType.BROWSER_VERSION, version);
+
+        HashMap<String, Object> ltOptions = new HashMap<String, Object>();
+        ltOptions.put("user", System.getenv("LT_USERNAME"));
+        ltOptions.put("accessKey", System.getenv("LT_ACCESS_KEY"));
+        ltOptions.put("build", "Selenium 4"); // your build/job name
+        ltOptions.put("name", this.getClass().getName());
+        ltOptions.put("platformName", "Windows 10");
+        ltOptions.put("seCdp", true);
+        ltOptions.put("selenium_version", "4.0.0"); // selenium 4 support
+        capability.setCapability("LT:Options", ltOptions);
 ```
 You can generate capabilities for your test requirements with the help of our inbuilt [Desired Capability Generator](https://www.lambdatest.com/capabilities-generator/).
 
