@@ -54,12 +54,9 @@ public class TestRunner {
         String[] Tags = new String[] { "Feature", "Falcon", "Severe" };
         capability.setCapability("tags", Tags);
 
-        // Chrome flag for headless using chrome options
-        ChromeOptions options = new ChromeOptions();
-
-        options.addArguments("--no-sandbox");
-        options.addArguments("--headless"); // headless flag for chrome
-        options.addArguments("disable-gpu");
+        ChromeOptions options = new ChromeOptions ();
+        // Setting chrome flag for incognito mode
+        options.addArguments("--incognito");
 
         capability.setCapability(ChromeOptions.CAPABILITY, options);
 

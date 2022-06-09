@@ -1,4 +1,4 @@
-# Run Selenium Tests With Cucumber On LambdaTest (Headless mode Example)
+# Run Selenium Tests With Cucumber On LambdaTest (Incogito mode Example)
 
 ![image](https://user-images.githubusercontent.com/70570645/171435902-8e87c640-dc42-4d01-a322-f39ffe1867d1.png)
 
@@ -101,22 +101,10 @@ DesiredCapabilities capability = new DesiredCapabilities();
             capability.setCapability(CapabilityType.VERSION,version);
             capability.setCapability(CapabilityType.PLATFORM, platform);
             capability.setCapability("build", "Your Build Name");
-            // Chrome flag for headless using chrome options
-        ChromeOptions options = new ChromeOptions();
-
-        options.addArguments("--no-sandbox");
-        options.addArguments("--headless"); // headless flag for chrome
-        options.addArguments("disable-gpu");
-
-        capability.setCapability(ChromeOptions.CAPABILITY, options);
-
-        /*
-         * At lambdatest you can execute headless tests via `headless` capability on
-         * chrome, firefox and microsoft edge browser
-         */
-
-        // lambdatest Headless mode capability
-        // capability.setCapability("headless",true);
+          ChromeOptions options = new ChromeOptions ();
+        // Setting chrome flag for incognito mode
+        options.addArguments("--incognito");
+        caps.setCapability(ChromeOptions.CAPABILITY, options);
 ```
 You can generate capabilities for your test requirements with the help of our inbuilt [Desired Capability Generator](https://www.lambdatest.com/capabilities-generator/).
 
