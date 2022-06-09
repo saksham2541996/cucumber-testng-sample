@@ -1,8 +1,8 @@
 package MyRunner;
 
 import java.net.URL;
+import java.util.HashMap;
 
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -40,29 +40,30 @@ public class TestRunner {
     public void setUpClass(String browser, String version, String platform) throws Exception {
 
         String username = System.getenv("LT_USERNAME") == null ? "YOUR LT_USERNAME" : System.getenv("LT_USERNAME");
-        String accesskey = System.getenv("LT_ACCESS_KEY") == null ? "YOUR LT_ACCESS_KEY"
-                : System.getenv("LT_ACCESS_KEY");
+        String accesskey = System.getenv("LT_ACCESS_KEY") == null ? "YOUR LT_ACCESS_KEY" : System.getenv("LT_ACCESS_KEY");
 
         DesiredCapabilities capability = new DesiredCapabilities();
         capability.setCapability(CapabilityType.BROWSER_NAME, browser);
-        capability.setCapability(CapabilityType.VERSION, version);
-        capability.setCapability(CapabilityType.PLATFORM_NAME, platform);
+        capability.setCapability(CapabilityType.BROWSER_VERSION, version);
 
-        capability.setCapability("build", "Cucumber Sample Build");
+        HashMap<String, Object> ltOptions = new HashMap<String, Object>();
+        ltOptions.put("user", System.getenv("LT_USERNAME"));
+        ltOptions.put("accessKey", System.getenv("LT_ACCESS_KEY"));
+        ltOptions.put("build", "Selenium 4");
+        ltOptions.put("name", this.getClass().getName());
+        ltOptions.put("platformName", "Windows 10");
+        ltOptions.put("seCdp", true);
+        ltOptions.put("selenium_version", "4.0.0"); // selenium 4 support
+
         capability.setCapability("plugin", "git-cucumber");
-
         String[] Tags = new String[] { "Feature", "Falcon", "Severe" };
         capability.setCapability("tags", Tags);
 
-        capability.setCapability("timezone", "UTC+03:00"); // Timezone capability to set the timezone
+        capability.setCapability("LT:Options", ltOptions);
 
         String gridURL = "https://" + username + ":" + accesskey + "@hub.lambdatest.com/wd/hub";
         System.out.println(gridURL);
         connection = new RemoteWebDriver(new URL(gridURL), capability);
-
-        connection.get("https://webbrowsertools.com/timezone/");
-
-        Thread.sleep(15000);
 
         System.out.println(capability);
         System.out.println(connection.getSessionId());
