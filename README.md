@@ -1,4 +1,4 @@
-# Run Selenium Tests With Cucumber On LambdaTest (Incogito mode Example)
+# Run Selenium Tests With Cucumber On LambdaTest (Timezone setting Example)
 
 ![image](https://user-images.githubusercontent.com/70570645/171435902-8e87c640-dc42-4d01-a322-f39ffe1867d1.png)
 
@@ -101,10 +101,7 @@ DesiredCapabilities capability = new DesiredCapabilities();
             capability.setCapability(CapabilityType.VERSION,version);
             capability.setCapability(CapabilityType.PLATFORM, platform);
             capability.setCapability("build", "Your Build Name");
-          ChromeOptions options = new ChromeOptions ();
-        // Setting chrome flag for incognito mode
-        options.addArguments("--incognito");
-        caps.setCapability(ChromeOptions.CAPABILITY, options);
+         capability.setCapability("timezone","UTC+03:00"); //Timezone capability to set the timezone
 ```
 You can generate capabilities for your test requirements with the help of our inbuilt [Desired Capability Generator](https://www.lambdatest.com/capabilities-generator/).
 

@@ -54,23 +54,15 @@ public class TestRunner {
         String[] Tags = new String[] { "Feature", "Falcon", "Severe" };
         capability.setCapability("tags", Tags);
 
-        ChromeOptions options = new ChromeOptions ();
-        // Setting chrome flag for incognito mode
-        options.addArguments("--incognito");
-
-        capability.setCapability(ChromeOptions.CAPABILITY, options);
-
-        /*
-         * At lambdatest you can execute headless tests via `headless` capability on
-         * chrome, firefox and microsoft edge browser
-         */
-
-        // lambdatest Headless mode capability
-        // capability.setCapability("headless",true);
+        capability.setCapability("timezone", "UTC+03:00"); // Timezone capability to set the timezone
 
         String gridURL = "https://" + username + ":" + accesskey + "@hub.lambdatest.com/wd/hub";
         System.out.println(gridURL);
         connection = new RemoteWebDriver(new URL(gridURL), capability);
+
+        connection.get("https://webbrowsertools.com/timezone/");
+
+        Thread.sleep(15000);
 
         System.out.println(capability);
         System.out.println(connection.getSessionId());
