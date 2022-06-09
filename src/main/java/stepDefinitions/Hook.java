@@ -17,7 +17,10 @@ public class Hook extends TestRunner {
     }
 
     @After
-    public void close_the_browser(Scenario scenario) {
+    public void close_the_browser(Scenario scenario) throws InterruptedException {
+        // Clearing browser Cache after Test
+        driver.manage().deleteAllCookies(); // delete all cookies
+        Thread.sleep(7000); // wait 7 seconds to clear cookies.
         driver.executeScript("lambda-status=" + (scenario.isFailed() ? "failed" : "passed"));
         System.out.println(driver.getSessionId());
         driver.quit();
