@@ -65,24 +65,25 @@ public class TestRunner {
 
             System.out.println("Loading Url");
 
-            connection.get("https://lambdatest.com");
+            connection.get("https://lambdatest.github.io/sample-todo-app/");
+            /*
+             * text(): A built-in method in Selenium WebDriver that is used with XPath
+             * locator to locate an element based on its exact text value.
+             * Example: //*[ text() = ‘5 of 5 remaining’ ]
+             * contains(): Similar to the text() method, contains() is another built-in
+             * method used to locate an element based on partial text match.
+             * For example, if we need to locate a label that has “5 of 5 remaining” as its
+             * text, it can be located using the following line of code with Xpath.
+             * Example: //*[ contains (text(), ‘5 of 5’ ) ]
+             */
     
-            // Locating element by link text 
-            WebElement Element = connection.findElement(By.linkText("Book a Demo"));
+            // Locating element with text()
+            WebElement e = connection.findElement(By.xpath("//*[text()='5 of 5 remaining']"));
+            System.out.println(e.getText());
     
-            // Scrolling down the page till the element is found
-            connection.executeScript("arguments[0].scrollIntoView();", Element);
-            Thread.sleep(1500);
-    
-            // Scrolling down by pixels
-            connection.executeScript("window.scrollBy(0,-500)", "");
-    
-            Thread.sleep(1500);
-    
-            // Scrolling up by pixels
-            connection.executeScript("window.scrollBy(0,500)", "");
-    
-            Thread.sleep(1500);
+            // located element with contains()
+            WebElement m = connection.findElement(By.xpath("//*[contains(text(),'5 of 5')]"));
+            System.out.println(m.getText());
 
     		System.out.println(capability);
     		System.out.println(connection.getSessionId());

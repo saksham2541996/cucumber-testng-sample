@@ -1,4 +1,4 @@
-# Run Selenium Tests With Cucumber On LambdaTest (Scrolling element into view and scroll by pixel testng selenium Example)
+# Run Selenium Tests With Cucumber On LambdaTest (Locating element with text and partial text Example)
 
 ![image](https://user-images.githubusercontent.com/70570645/171435902-8e87c640-dc42-4d01-a322-f39ffe1867d1.png)
 
@@ -102,19 +102,16 @@ DesiredCapabilities capability = new DesiredCapabilities();
             capability.setCapability(CapabilityType.PLATFORM, platform);
             capability.setCapability("build", "Your Build Name");
 ```
-### Scrolling element into view and scroll by pixel testng selenium code
-```java
-// Locating element by link text 
-        WebElement Element = driver.findElement(By.linkText("Book a Demo"));
-        // Scrolling down the page till the element is found
-        driver.executeScript("arguments[0].scrollIntoView();", Element);
-        Thread.sleep(1500);
-        // Scrolling down by pixels
-        driver.executeScript("window.scrollBy(0,-500)", "");
-        Thread.sleep(1500);
-        // Scrolling up by pixels
-        driver.executeScript("window.scrollBy(0,500)", "");
+### Locating element with text and partial text testng java
+ ```java // Locating element with text()
+        WebElement e = driver.findElement(By.xpath("//*[text()='5 of 5 remaining']"));
+        System.out.println(e.getText());
+
+        // located element with contains()
+        WebElement m = driver.findElement(By.xpath("//*[contains(text(),'5 of 5')]"));
+        System.out.println(m.getText());
 ```
+
 You can generate capabilities for your test requirements with the help of [Desired Capability Generator](https://www.lambdatest.com/capabilities-generator/).
 
 ### Executing The Test
